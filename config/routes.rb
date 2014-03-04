@@ -8,9 +8,9 @@ GiftsApplication::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
 
   root :to => 'static_pages#home'
-  match '/signin', to: 'sessions#new', via: 'get'
-  match '/signup', to: 'users#new', via: 'get'
-  match '/signout', to: 'sessions#destroy', via: 'delete'
+  match '/signin', to: 'sessions#new', via: 'get', as: 'signin'
+  match '/signup', to: 'users#new', via: 'get', as: 'signup'
+  match '/signout', to: 'sessions#destroy', via: 'delete', as: 'signout'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
