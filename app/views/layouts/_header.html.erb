@@ -6,20 +6,6 @@
 
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
-<%
-=begin%>
-				<% @recipients.each do |recipient| %>
-				<li class="dropdown">
-					<%= link_to (recipient["displayName"] + '<b class="caret"></b>').html_safe, '#', :'data-toggle' => :'dropdown', :class => 'dropdown-toggle' %>
-					<ul class="dropdown-menu">
-						<% recipient["childRecipients"].each do |child| %>
-						<li><%= link_to child["displayName"], '#' %></li>
-						<% end %>
-					</ul>
-				</li>
-				<% end %>
-<%
-=end%>
 			</ul>
 
 			<div class="nav navbar-nav navbar-right">
