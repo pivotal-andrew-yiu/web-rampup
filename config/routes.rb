@@ -1,12 +1,13 @@
 GiftsApplication::Application.routes.draw do
 
   resources :users
-  resources :recipients
-  resources :gifts
+  resources :static_pages do
+    post :search_artist, on: :collection, as: :search_artist
+    post :search_zipcode, on: :collection, as: :search_zipcode
+  end
   resources :sessions, only: [:new, :create, :destroy]
 
-  root :to => 'gifts#index'
-
+  root :to => 'static_pages#home'
   match '/signin', to: 'sessions#new', via: 'get'
   match '/signup', to: 'users#new', via: 'get'
   match '/signout', to: 'sessions#destroy', via: 'delete'
