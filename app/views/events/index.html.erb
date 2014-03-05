@@ -21,7 +21,7 @@
                     <%= link_to "Get Tickets", event['TicketUrl'] %><br>
 
                     <% if signed_in? %>
-                        <%= button_to "Add to favourites", favorite_event_path( :method => :post ), class: "btn btn-primary" %>
+                        <%= button_to "Add to favourites", favorite_event_path( 'eventId' => event['Id'], 'artistId' => @artistId, 'zipCode' => @zipcode ), class: "btn btn-primary" %>
                     <% end %>
                 </div>
             </li>

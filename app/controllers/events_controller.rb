@@ -6,6 +6,8 @@ class EventsController < ApplicationController
     @artistId = params['artistId']
     if !params['static_pages'].nil?
       @zipcode = params['static_pages']['zipcode']
+    else
+      @zipcode = params['zipcode']
     end
 
     if !@artistId.nil?

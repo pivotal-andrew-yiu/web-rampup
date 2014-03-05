@@ -86,10 +86,16 @@ class UsersController < ApplicationController
     @user = current_user
 
     if @user
-      @user.add_event_to_favorites("yooooooo!")
+      @user.add_event_to_favorites(params['eventId'])
     end
 
-    redirect_to :back
+    if params['artistId']
+      redirect_to events_path('artistId' => params['artistId'])
+    elsif params['zipCode']
+      redirect_to events_path('zipcode' => params['zipCode'])
+    else
+      redirect_to :back
+    end
   end
 
   def current_user

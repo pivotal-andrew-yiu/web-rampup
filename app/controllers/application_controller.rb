@@ -12,7 +12,9 @@ class ApplicationController < ActionController::Base
 		# api key 2
 		# API_KEY = 'bsr4tbszdqpawzpet8zk8wyk'
 		# api key 3
-		API_KEY = 'rrwx9b43vpzppzc366vhb75h'
+		# API_KEY = 'rrwx9b43vpzppzc366vhb75h'
+		# api key 4
+		API_KEY = 'xd7kby7w5awu2ywkpp23y4eh'
 
 		def get_api_key_param
 			return { 'api_key' => ApiEndpoints::API_KEY }
