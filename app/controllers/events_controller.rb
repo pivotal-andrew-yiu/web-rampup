@@ -1,5 +1,7 @@
 class EventsController < ApplicationController
   include ApiEndpoints
+  include SessionsHelper
+  include UsersHelper
 
   def index
     @artistName = params['artistName']
