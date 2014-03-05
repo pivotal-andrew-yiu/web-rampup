@@ -81,4 +81,19 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def favorite_event
+    @user = current_user
+
+    if @user
+      @user.add_event_to_favorites("yooooooo!")
+    end
+
+    redirect_to :back
+  end
+
+  def current_user
+    remember_token = User.hash(cookies[:remember_token])
+    @current_user ||= User.find_by_remember_token(remember_token)
+  end
 end

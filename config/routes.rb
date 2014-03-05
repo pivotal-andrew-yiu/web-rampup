@@ -1,16 +1,22 @@
 GiftsApplication::Application.routes.draw do
 
+  resources :events
   resources :users
   resources :static_pages do
-    post :search_artist, on: :collection, as: :search_artist
-    post :search_zipcode, on: :collection, as: :search_zipcode
+    get :search_artist, on: :collection, as: :search_artist
+    get :search_zipcode, on: :collection, as: :search_zipcode
   end
   resources :sessions, only: [:new, :create, :destroy]
 
   root :to => 'static_pages#home'
+  match '/venues', to: 'static_pages#venues', via: 'get', as: 'venues'
+  match '/artists', to: 'static_pages#artist', via: 'get', as: 'artists'
+  match '/events', to: 'events#index', via: 'get', as: 'events'
   match '/signin', to: 'sessions#new', via: 'get', as: 'signin'
   match '/signup', to: 'users#new', via: 'get', as: 'signup'
   match '/signout', to: 'sessions#destroy', via: 'get', as: 'signout'
+  match '/favorite_event', to: 'users#favorite_event', via: 'post', as: 'favorite_event'
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

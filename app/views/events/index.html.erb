@@ -1,0 +1,29 @@
+<h1>Listing events</h1>
+
+<h3><%= @events_for_text %></h3>
+
+<ul class="list-group">
+        <% @events.each do |event| %>
+            <li class="list-group-item">
+                <div>
+                    <%= event['Venue']['Name'] %><br>
+                    <%= event['Venue']['City'] %><br>
+                    <%= event['Date'] %>
+
+
+                    <h4>All Artists Performing</h4>
+                    <% event['Artists'].each do |artist| %>
+                        <%= artist['Name'] %><br>
+                    <% end %>
+
+
+                    <br>
+                    <%= link_to "Get Tickets", event['TicketUrl'] %><br>
+
+                    <% if signed_in? %>
+                        <%= button_to "Add to favourites", favorite_event_path( :method => :post ), class: "btn btn-primary" %>
+                    <% end %>
+                </div>
+            </li>
+        <% end %>
+</ul>

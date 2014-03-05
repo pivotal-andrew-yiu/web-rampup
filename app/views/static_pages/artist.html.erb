@@ -1,0 +1,11 @@
+<h1>Search Results for: <%= @search %></h1>
+
+<ul class="list-group col-md-10 col-md-offset-1">
+		<% @artists.each do |artist| %>
+			<li class="list-group-item"><%= link_to artist['Name'], events_path( 'artistId' => artist['Id'], 'artistName' => artist['Name'] ) %></li>
+		<% end %>
+</ul>
+
+<% if @artists.empty? %>
+	<h2 class="center">Sorry, no results</h2>
+<% end %>

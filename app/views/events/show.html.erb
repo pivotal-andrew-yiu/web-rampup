@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Date:</b>
+  <%= @event.date %>
+</p>
+
+<p>
+  <b>Venue name:</b>
+  <%= @event.venue_name %>
+</p>
+
+<p>
+  <b>Artist names:</b>
+  <%= @event.artist_names %>
+</p>
+
+<p>
+  <b>Ticket url:</b>
+  <%= @event.ticket_url %>
+</p>
+
+<p>
+  <b>Venue:</b>
+  <%= @event.venue_id %>
+</p>
+
+<p>
+  <b>Artist ids:</b>
+  <%= @event.artist_ids %>
+</p>
+
+
+<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Back', events_path %>

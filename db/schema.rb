@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140304211147) do
+ActiveRecord::Schema.define(:version => 20140305194642) do
+
+  create_table "events", :force => true do |t|
+    t.string   "date"
+    t.string   "venue_name"
+    t.string   "artist_names"
+    t.string   "ticket_url"
+    t.integer  "venue_id"
+    t.string   "artist_ids"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "name"
@@ -20,6 +31,7 @@ ActiveRecord::Schema.define(:version => 20140304211147) do
     t.datetime "updated_at",      :null => false
     t.string   "email"
     t.string   "remember_token"
+    t.string   "favorite_events"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

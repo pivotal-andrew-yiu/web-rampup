@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Gifts</title>
+	<title>JamBase App</title>
 	<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
 	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 	<%= csrf_meta_tags %>
@@ -9,7 +9,7 @@
 <body>
 	<%= render 'layouts/header' %>
 	<% flash.each do |key, value| %>
-  		<div class="<%= flash_class(key) %>">
+  		<div class="<%= flash_class(key) %> col-md-8 col-md-offset-2">
   			<%= value %>
   		</div>
 	<% end %>
