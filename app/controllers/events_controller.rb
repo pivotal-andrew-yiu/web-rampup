@@ -62,9 +62,17 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    
+  
+    params.each do |key, value|
+      puts "#{key} is #{value}"
+    end
+
     if !current_user.events.find_by_event_id(params['Id'])
-      @event = current_user.events.create( event_id: params['Id'], venue_name: params['Venue']['Name'], date: params['Date'])
+      artist_list = []
+      params['Artists'].each do |artist|
+        artist_list << artist['Name']
+      end
+      @event = current_user.events.create( event_id: params['Id'], venue_name: params['Venue']['Name'], date: params['Date'], artist_names: artist_list.join(', '))
     end
 
     respond_to do |format|
