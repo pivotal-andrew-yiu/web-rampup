@@ -12,6 +12,10 @@ gem 'bootstrap-sass'
 
 group :development do
 	gem 'rails_layout'
+	gem 'rspec-rails'
+	gem 'capybara'
+	gem 'webrat'
+	gem 'factory_girl_rails'
 end
 
 # Gems used only for assets and not required

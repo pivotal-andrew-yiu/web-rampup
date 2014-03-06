@@ -6,9 +6,9 @@
 			<%= form_for(:static_pages, :url => artists_path, :html => { :method => :get, :class => "form-group form-inline" }) do |f| %>
 
 			<%= f.label 'Artist', class: "sr-only"%>
-			<%= f.text_field 'artist', class: "form-control", placeholder: "Enter Artist" %>
+			<%= f.text_field 'artist', class: "form-control", placeholder: "Enter Artist / Group" %>
 
-			<%= f.submit "Submit", class: "btn btn-large btn-primary" %>
+			<%= f.submit "Search", class: "btn btn-large btn-primary" %>
 
 			<% end %>
 		</div>
@@ -19,7 +19,7 @@
 			<%= f.label 'Zipcode', class: "sr-only"%>
 			<%= f.text_field 'zipcode', class: "form-control", placeholder: "Enter Zip Code" %>
 
-			<%= f.submit "Submit", class: "btn btn-large btn-primary" %>
+			<%= f.submit "Search", class: "btn btn-large btn-primary"%>
 
 			<% end %>
 		</div>

@@ -1,25 +1,38 @@
-<ul class="list-group">
-    <% @events.each do |event| %>
-        <li class="list-group-item">
-            <div>
-                <h4><strong><%= event['Venue']['Name'] %></strong></h4>
-                <%= event['Venue']['City'] %><br>
-                <%= Time.parse(event['Date']).strftime("%b %d, %Y") %><br>
-                <%= Time.parse(event['Date']).strftime("%l:%M %p") %><br><br>
+<% if @events %>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3><%= @events_for_text %></h3>
+        </div>
+        <ul class="list-group">
+            <% @events.each do |event| %>
+                <li class="list-group-item">
+                    <div>
+                        <h4><strong><%= event['Venue']['Name'] %></strong></h4>
+                        <%= event['Venue']['City'] %><br>
+                        <%= Time.parse(event['Date']).strftime("%b %d, %Y") %><br>
+                        <%= Time.parse(event['Date']).strftime("%l:%M %p") %><br><br>
 
-                <h5>All Artists Performing: </h5>
-                <% event['Artists'].each do |artist| %>
-                    <%= artist['Name'] %><br>
-                <% end %>
+                        <h5>All Artists Performing: </h5>
+                        <% event['Artists'].each do |artist| %>
+                            <%= artist['Name'] %><br>
+                        <% end %>
 
-                <br>
-                <div class="row-fluid">
-                    <%= button_to "Get Tickets", event['TicketUrl'], class: "btn btn-info" %>
-                    <% if signed_in? %>
-                        <%= button_to "Add to favourites", events_path(event), method: :post, class: "btn btn-primary" %>
-                    <% end %>
-                </div>
-            </div>
-        </li>
-    <% end %>
-</ul>
+                        <br>
+                        <div class="row-fluid">
+                            <%= link_to "Get Tickets", event['TicketUrl'], class: "btn btn-info" %>
+                            <% if signed_in? %>
+                                <%= button_to "Add to favourites", events_path(event), method: :post, class: "btn btn-primary" %>
+                            <% end %>
+                        </div>
+                    </div>
+                </li>
+            <% end %>
+
+            <% if @events.empty? %>
+                <li class="list-group-item"><h2 class="text-center">Sorry, no results</h2></li>
+            <% end %>
+        </ul>
+    </div>
+<% else %>
+    <h2 class="text-center">Sorry, no results</h2>
+<% end %>

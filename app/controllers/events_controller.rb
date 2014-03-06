@@ -6,6 +6,7 @@ class EventsController < ApplicationController
   def index
     @artistName = params['artistName']
     @artistId = params['artistId']
+    
     if !params['static_pages'].nil?
       @zipcode = params['static_pages']['zipcode']
     else
@@ -14,12 +15,15 @@ class EventsController < ApplicationController
 
     if !@artistId.nil?
       @events = JSON.parse(get_events_json({'artistId' => @artistId}))['Events']
-      @events_for_text = 'Events for ' + @artistName
+      @events_for_text = 'Listing events for ' + @artistName
     elsif !@zipcode.nil?
       @events = JSON.parse(get_events_json({'zipCode' => @zipcode}))['Events']
-      @events_for_text = 'Events near ' + @zipcode
+      @events_for_text = 'Listing events in the ' + @zipcode + ' area'
+    elsif @artistId.empty? || @zipcode.empty?
+      redirect_to :back
     else
-      @events = []
+      @events = nil
+      @events_for_text = ""
     end
 
     respond_to do |format|
