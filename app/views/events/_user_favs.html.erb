@@ -1,0 +1,13 @@
+<% if current_user.events.any? %>
+	<h3>Favourite Events</h3>
+	<ul class="list-group">
+		<% @current_user.events.each do |event| %>
+			<li class="list-group-item">
+				<%= event.venue_name %>
+
+				<%= button_to "Remove from Favourites", event_path(event.id), method: :delete, class: "btn btn-primary" %>
+
+			</li>
+		<% end %>
+	</ul>
+<% end %>

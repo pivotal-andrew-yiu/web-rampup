@@ -2,12 +2,13 @@
     <h1>Listing events</h1>
     <h3><%= @events_for_text %></h3>
 
-    <div class="row-fuild">
+    <div class="container-fuild">
         <% if signed_in? && has_favorite_events? %>
             <div class="col-md-8">
                 <%= render 'event_list' %>
             </div>
             <div class="col-md-4">
+                <%= render 'user_favs' %>
             </div>
         <% else %>
             <%= render 'event_list' %>

@@ -82,22 +82,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def favorite_event
-    @user = current_user
-
-    if @user
-      @user.add_event_to_favorites(params['eventId'])
-    end
-
-    if params['artistId']
-      redirect_to events_path('artistId' => params['artistId'])
-    elsif params['zipCode']
-      redirect_to events_path('zipcode' => params['zipCode'])
-    else
-      redirect_to :back
-    end
-  end
-
   def current_user
     remember_token = User.hash(cookies[:remember_token])
     @current_user ||= User.find_by_remember_token(remember_token)

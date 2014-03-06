@@ -8,14 +8,14 @@ class ApplicationController < ActionController::Base
 		EVENTS = ROOT_API + '/events?'
 		ARTISTS = ROOT_API + '/artists?'
 		VENUES = ROOT_API + '/venues?'
-		# api key 1 - used up for march 5th
+		# api key 1
 		# API_KEY = '6agbnnahmx35snemrxx5pgwe'
 		# api key 2
-		# API_KEY = 'bsr4tbszdqpawzpet8zk8wyk'
+		API_KEY = 'bsr4tbszdqpawzpet8zk8wyk'
 		# api key 3
 		# API_KEY = 'rrwx9b43vpzppzc366vhb75h'
 		# api key 4
-		API_KEY = 'xd7kby7w5awu2ywkpp23y4eh'
+		# API_KEY = 'xd7kby7w5awu2ywkpp23y4eh'
 
 		def get_api_key_param
 			return { 'api_key' => ApiEndpoints::API_KEY }

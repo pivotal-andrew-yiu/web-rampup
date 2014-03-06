@@ -58,17 +58,37 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @event = Event.new(params[:event])
+    
+    if !current_user.events.find_by_event_id(params['Id'])
+      @event = current_user.events.create( event_id: params['Id'], venue_name: params['Venue']['Name'], date: params['Date'])
+    end
 
     respond_to do |format|
-      if @event.save
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
+      if @event && @event.save
+        format.html { 
+          if params['artistId']
+            redirect_to events_path('artistId' => params['artistId'])
+          elsif params['zipCode']
+            redirect_to events_path('zipcode' => params['zipCode'])
+          else
+            redirect_to :back
+          end 
+        }
         format.json { render json: @event, status: :created, location: @event }
       else
-        format.html { render action: "new" }
+        format.html { 
+          if params['artistId']
+            redirect_to events_path('artistId' => params['artistId'])
+          elsif params['zipCode']
+            redirect_to events_path('zipcode' => params['zipCode'])
+          else
+            redirect_to :back
+          end
+        }
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   # PUT /events/1
@@ -90,11 +110,20 @@ class EventsController < ApplicationController
   # DELETE /events/1
   # DELETE /events/1.json
   def destroy
+
     @event = Event.find(params[:id])
     @event.destroy
 
     respond_to do |format|
-      format.html { redirect_to events_url }
+      format.html {
+        if params['artistId']
+          redirect_to events_path('artistId' => params['artistId'])
+        elsif params['zipCode']
+          redirect_to events_path('zipcode' => params['zipCode'])
+        else
+          redirect_to :back
+        end
+      }
       format.json { head :no_content }
     end
   end

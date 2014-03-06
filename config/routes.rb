@@ -15,7 +15,6 @@ GiftsApplication::Application.routes.draw do
   match '/signin', to: 'sessions#new', via: 'get', as: 'signin'
   match '/signup', to: 'users#new', via: 'get', as: 'signup'
   match '/signout', to: 'sessions#destroy', via: 'get', as: 'signout'
-  match '/favorite_event', to: 'users#favorite_event', via: 'post', as: 'favorite_event'
 
 
   # The priority is based upon order of creation:

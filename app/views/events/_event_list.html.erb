@@ -2,23 +2,23 @@
     <% @events.each do |event| %>
         <li class="list-group-item">
             <div>
-                <%= event['Venue']['Name'] %><br>
+                <h4><strong><%= event['Venue']['Name'] %></strong></h4>
                 <%= event['Venue']['City'] %><br>
-                <%= event['Date'] %>
+                <%= Time.parse(event['Date']).strftime("%b %d, %Y") %><br>
+                <%= Time.parse(event['Date']).strftime("%l:%M %p") %><br><br>
 
-
-                <h4>All Artists Performing</h4>
+                <h5>All Artists Performing: </h5>
                 <% event['Artists'].each do |artist| %>
                     <%= artist['Name'] %><br>
                 <% end %>
 
-
                 <br>
-                <%= link_to "Get Tickets", event['TicketUrl'] %><br>
-
-                <% if signed_in? %>
-                    <%= button_to "Add to favourites", favorite_event_path( 'eventId' => event['Id'], 'artistId' => @artistId, 'zipCode' => @zipcode ), class: "btn btn-primary" %>
-                <% end %>
+                <div class="row-fluid">
+                    <%= button_to "Get Tickets", event['TicketUrl'], class: "btn btn-info" %>
+                    <% if signed_in? %>
+                        <%= button_to "Add to favourites", events_path(event), method: :post, class: "btn btn-primary" %>
+                    <% end %>
+                </div>
             </div>
         </li>
     <% end %>
