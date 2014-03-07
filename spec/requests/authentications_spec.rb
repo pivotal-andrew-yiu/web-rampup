@@ -19,11 +19,33 @@ describe "Authentications" do
 	    	end
 
 	    	it{ expect(page).to have_link('Sign Out', href: signout_path) }
+	    	it{ expect(page).to have_content(user.name) }
+	    	it{ expect(page).to have_content('Information') }
 	    	it{ expect(page).to_not have_link('Sign In', href: signin_path) }
+
+	    	describe " and then signout" do
+	    		before do
+	    			click_link "Sign Out"
+	    		end
+
+		    	it{ expect(page).to_not have_link('Sign Out', href: signout_path) }
+		    	it{ expect(page).to have_link('Sign In', href: signin_path) }
+		    	it{ expect(page).to have_content('You have signed out!') }
+		    end
 	    end
 	end
 
-	describe "signup" do
+	describe "signup" do    
+		invalid_user_info = {
+			"name" => "a",
+			"email" => "a@a.a",
+			"password" => "password",
+			"password_confirmation" => "password",
+			"invalid_email" => "asdfsaf.adfss",
+			"short_password" => "alpha",
+			"invalid_password_confirmation" => "notpassword"
+		}
+
 		before { visit signup_path }
 
 		describe "with no information" do
@@ -43,7 +65,7 @@ describe "Authentications" do
 
 		describe "with no name" do
 			before do
-	    		fill_in "Email", with: "a@a.com"
+	    		fill_in "Email", with: invalid_user_info['email']
 	    		fill_in "Password", with: "password"
 	    		fill_in "Password confirmation", with: "password"
 				click_button "Create Account"
@@ -140,12 +162,11 @@ describe "Authentications" do
 
 			it{ expect(page).to have_content('Welcome!') }
 
+			it{ expect(page).to have_content("Andrew Yiu") }
+			it{ expect(page).to have_content("b@b.com") }
+
 	    	it{ expect(page).to have_link('Sign Out', href: signout_path) }
 	    	it{ expect(page).to_not have_link('Sign In', href: signin_path) }
 		end
-	end
-
-	describe "signout" do
-		
 	end
 end

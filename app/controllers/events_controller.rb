@@ -1,7 +1,23 @@
 class EventsController < ApplicationController
+  before_filter :checkZipCodeLength, only: [:index]
+
   include ApiEndpoints
   include SessionsHelper
   include UsersHelper
+
+  def checkZipCodeLength
+    if params['static_pages']
+      @zipcode = params['static_pages']['zipcode']
+    else
+      @zipcode = params['zipcode']
+    end
+
+    if @zipcode && ( @zipcode.length != 5 || !@zipcode.is_i? )
+      flash[:error] = ' Invalid Zip Code'
+      redirect_to root_path
+    end
+  end
+
 
   def index
     @artistName = params['artistName']
@@ -14,11 +30,27 @@ class EventsController < ApplicationController
     end
 
     if !@artistId.nil?
-      @events = JSON.parse(get_events_json({'artistId' => @artistId}))['Events']
-      @events_for_text = 'Listing events for ' + @artistName
+
+      artist_response = get_events_response_body({'artistId' => @artistId})
+      if artist_response
+        @events = JSON.parse(artist_response)['Events']
+        @events_for_text = 'Listing events for \'' + @artistName + '\''
+      else
+        @events = nil
+        @events_for_text = ""
+      end
+
     elsif !@zipcode.nil?
-      @events = JSON.parse(get_events_json({'zipCode' => @zipcode}))['Events']
-      @events_for_text = 'Listing events in the ' + @zipcode + ' area'
+
+      event_response = get_events_response_body({'zipCode' => @zipcode})
+      if event_response
+        @events = JSON.parse(event_response)['Events']
+        @events_for_text = 'Listing events in the ' + @zipcode + ' area'
+      else
+        @events = nil
+        @events_for_text = ""
+      end
+
     elsif @artistId.empty? || @zipcode.empty?
       redirect_to :back
     else

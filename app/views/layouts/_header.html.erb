@@ -11,6 +11,7 @@
 			<div class="nav navbar-nav navbar-right">
 				<ul class="nav navbar-nav navbar-right">
 					<% if signed_in? %>
+						<li><%= link_to current_user.name, current_user %></li>
 						<li><%= link_to 'Sign Out', signout_path %></li>
 					<% else %>
 						<li><%= link_to 'Sign In', signin_path %></li>

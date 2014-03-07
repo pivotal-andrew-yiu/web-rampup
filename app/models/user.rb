@@ -28,19 +28,6 @@ class User < ActiveRecord::Base
   def add_event_to_favorites(event)
     if self.favorite_events.nil?
       update_attribute(:favorite_events, event)
-    else
-      unless get_favorite_events.include?(event)
-        update_attribute(:favorite_events, [get_favorite_events, event].join(","))
-      end
-    end
-  end
-
-  def get_favorite_events
-    if self.favorite_events.nil?
-      return ''
-    else
-      puts self.favorite_events
-      return self.favorite_events.split(/,/)
     end
   end
 

@@ -5,7 +5,7 @@
 			<li class="list-group-item">
 				<h5><strong><%= event.venue_name %></strong></h5>
 				<h5><%= Time.parse(event.date).strftime("%b %d, %Y") %></h5>
-				<%= event.artist_names %>
+				<strong>Performances by: </strong><%= event.artist_names %>
 				<%= button_to "Remove", event_path(event.id), method: :delete, class: "btn btn-danger btn-xs btn-block" %>
 
 			</li>
