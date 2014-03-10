@@ -16,6 +16,8 @@ group :development do
 	gem 'capybara'
 	gem 'webrat'
 	gem 'factory_girl_rails'
+	gem 'cucumber-rails'
+	gem 'database_cleaner'
 end
 
 # Gems used only for assets and not required
